@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Languages>
+  <Language id="ger" name="Deutsch">
+    <text id="top_menu_options">Optionen</text>
+    <text id="top_menu_language">Spreche</text>
+    <text id="top_menu_style">Thema ÄäÖöÜüẞß</text>
+    <text id="top_menu_font_size">Schriftgröße</text>
+  </Language>
+  <Language id="esp" name="Español ">
+    <text id="top_menu_options">opciones</text>
+    <text id="top_menu_language">Idioma</text>
+    <text id="top_menu_style">Tema</text>
+    <text id="top_menu_font_size">tamaño de fuente</text>
+  </Language>
+</Languages>

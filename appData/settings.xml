@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Settings>
+  <Setting id="cred_name">Credentials name</Setting>
+  <Setting id="date_utc">2021-05-20T00:00:00.0000000+02:00</Setting>
+  <Setting id="interval_sec">60</Setting>
+  <Setting id="font_size">12</Setting>
+</Settings>

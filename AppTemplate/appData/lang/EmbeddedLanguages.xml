@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Languages>
+  <Language id="pol" name="Polski">
+    <!--=== MENU ===-->
+    <text id="menu_button_actions">Akcje</text>
+    <text id="menu_button_configuration">Konfiguracja</text>
+    <text id="menu_button_info">O programie</text>
+    <text id="menu_button_exit">Wyjdź</text>
+
+    <!--=== TOP MENU ===-->
+    <!--TOP MENU Options-->
+    <text id="app_name">Nazwa aplikacji</text>
+    <text id="top_menu_options">Opcje</text>
+    <text id="top_menu_language">Język</text>
+    <text id="top_menu_style">Motyw programu</text>
+    <text id="top_menu_font_size">Rozmiar czcionki</text>
+    <!--=== TOP MENU Navigation ===-->
+    <text id="top_menu_navigation">Nawigacja</text>
+    <text id="top_menu_go_back">Wróć</text>
+    <text id="top_menu_go_forward">Naprzód</text>
+    
+
+    <!--=== ABOUT PAGE ===-->
+    <text id="application_info">
+Używaj aplikacji
+według swojego
+uznania :]
+    </text>
+    <text id="author_info">Marcin Kaszuba 2021</text>
+
+    <!--=== ACTIONS PAGE ===-->
+    <text id="button_actions_process_run">Rozpocznij proces</text>
+    <text id="button_actions_process_stop">Zatrzymaj proces</text>
+    <text id="button_actions_minimize">Minimalizuj</text>
+
+    <!--=== CONFIG PAGE ===-->
+    <text id="config_label_pick_date">Wybierz datę</text>
+    <text id="config_label_user">Email - użytkownik</text>
+    <text id="config_label_password">Email - hasło</text>
+    <text id="config_label_interval_sec">Interwał (w sekundach)</text>
+    <text id="config_button_save">Zapisz ustawienia</text>
+    
+    <!--=== TRAY ===-->
+    <text id="button_restore_from_tray">Pokaż aplikację</text>
+    <text id="app_minimised_ballontip">Aplikacja została zminimalizowana</text>
+    
+    <!--=== MESSAGE BOX ===-->
+    <text id="msgbox_save_settings_text">Wykryto zmianę ustawień. Czy chcesz zapisać nowe ustawienia?</text>
+    <text id="msgbox_save_settings_caption">Czy zapisać ustawienia?</text>
+    <text id="msgbox_wrong_interval_text">Wprowadź dodatnią liczbę!</text>
+    <text id="msgbox_wrong_data_generic_caption">Wprowadzono błędne dane</text>
+
+    <!--=== STATUS BAR ===-->
+    <text id="left_status_bar_program_started">Program aktywny</text>
+    <text id="left_status_bar_program_start_error">Wystąpił błąd podczas uruchamiania programu</text>
+    <text id="left_status_bar_program_stopped">Program nieaktywny</text>
+    <text id="left_status_bar_program_stop_error">Wystąpił błąd podczas zatrzymywania programu</text>
+    <text id="left_status_bar_next_run_time">Następne uruchomienie programu za: {0:hh\:mm\:ss}</text>
+    <text id="left_status_bar_next_run_never">Następne uruchomienie programu za: ∞</text>
+    <text id="middle_status_bar_proces_active_info">Przerobiono pozycję {0} z {1}</text>
+    <text id="middle_status_bar_proces_completed_info">Zakończono proces o {0:H:mm:ss}. Przerobione pozycje: {1} z {2}</text>
+    
+    <!--=== THEMES ===
+        Resource Dictionary file shoud be added to all\themes\[here]
+        <text id="theme_[theme filename without .xaml]">Ciemny</text>-->
+    <text id="theme_Default">Domyślny</text>
+    <text id="theme_Dark">Ciemny</text>
+    <text id="theme_DSIII">Dark souls III</text>
+  </Language>
+  
+  
+  
+  <Language id="eng" name="English">
+    <!--=== MENU ===-->
+    <text id="menu_button_actions">Actions</text>
+    <text id="menu_button_configuration">Configuration</text>
+    <text id="menu_button_info">About</text>
+    <text id="menu_button_exit">Exit</text>
+
+    <!--=== TOP MENU ===-->
+    <!--TOP MENU Options-->
+    <text id="app_name">Application name</text>
+    <text id="top_menu_options">Options</text>
+    <text id="top_menu_language">Laguage</text>
+    <text id="top_menu_style">Application theme</text>
+    <text id="top_menu_font_size">Font size</text>
+    <!--TOP MENU Navigation-->
+    <text id="top_menu_navigation">Navigation</text>
+    <text id="top_menu_go_back">Back</text>
+    <text id="top_menu_go_forward">Forward</text>
+
+    <!--=== ABOUT PAGE ===-->
+    <text id="application_info">
+   This application
+shouldn't be used
+sparingly :)</text>
+    <text id="author_info">Marcin Kaszuba 2021</text>
+
+    <!--=== ACTIONS PAGE ===-->
+    <text id="button_actions_process_run">Start process</text>
+    <text id="button_actions_process_stop">Stop process</text>
+    <text id="button_actions_minimize">Minimize</text>
+
+    <!--=== CONFIG PAGE ===-->
+    <text id="config_label_pick_date">Choose date</text>
+    <text id="config_label_user">Email username</text>
+    <text id="config_label_password">Email password</text>
+    <text id="config_label_interval_sec">Interval (in seconds)</text>
+    <text id="config_button_save">Save settings</text>
+    
+    <!--=== TRAY ===-->
+    <text id="button_restore_from_tray">Show applications</text>
+    <text id="app_minimised_ballontip">Application has been minimised</text>
+    
+    <!--=== MESSAGE BOX ===-->
+    <text id="msgbox_save_settings_text">Settings change detected. Do you want to save new settings?</text>
+    <text id="msgbox_save_settings_caption">Save settings?</text>
+    <text id="msgbox_wrong_interval_text">Insert positive number!</text>
+    <text id="msgbox_wrong_data_generic_caption">Incorrect data</text>
+
+    <!--=== STATUS BAR ===-->
+    <text id="left_status_bar_program_started">Program active</text>
+    <text id="left_status_bar_program_start_error">Error occured when trying to start program</text>
+    <text id="left_status_bar_program_stopped">Program inactive</text>
+    <text id="left_status_bar_program_stop_error">Error occured when trying to stop program</text>
+    <text id="left_status_bar_next_run_time">Next program run in: {0:hh\:mm\:ss}</text>
+    <text id="left_status_bar_next_run_never">Next program run in: ∞</text>
+    <text id="middle_status_bar_proces_active_info">Processed item {0} of {1}</text>
+    <text id="middle_status_bar_proces_completed_info">Process finished at {0:H:mm:ss}. Processed items: {1} z {2}</text>
+
+    <!--=== THEMES ===-->
+    <text id="theme_Default">Default</text>
+    <text id="theme_Dark">Dark</text>
+    <text id="theme_DSIII">Dark souls III</text>
+  </Language>
+</Languages>
