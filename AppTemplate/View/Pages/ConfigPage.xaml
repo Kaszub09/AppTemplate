@@ -38,7 +38,7 @@
         <DatePicker FontSize="{Binding FontSize}" Name="ChosedDate" Grid.Column="3"   Grid.Row="1"  VerticalContentAlignment="Center"/>
 
         <Label FontSize="{Binding FontSize}" Content="{Binding VMText[config_label_user]}" Grid.Column="1"  Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <TextBox FontSize="{Binding FontSize}" Name="Username" Text="user" Grid.Column="3"  VerticalAlignment="Center"  Grid.Row="3" TextWrapping="NoWrap"  VerticalContentAlignment="Center"/>
+        <TextBox FontSize="{Binding FontSize}" Name="Username" Text="user" Grid.Column="3"    Grid.Row="3" TextWrapping="NoWrap"  VerticalContentAlignment="Center"/>
 
         <Label FontSize="{Binding FontSize}"  Content="{Binding VMText[config_label_password]}" Grid.Column="1"  Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         <PasswordBox FontSize="{Binding FontSize}" Name="Password" Password="password" Grid.Column="3"    Grid.Row="5"  VerticalContentAlignment="Center" />
