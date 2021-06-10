@@ -20,43 +20,57 @@ namespace AppTemplate.View.Pages {
     /// Logika interakcji dla klasy ConfigPage.xaml
     /// </summary>
     public partial class ConfigPage : Page, INavigablePage {
-
         public ConfigPage() {
             InitializeComponent();
-            if (!(this.DataContext is MainViewModel))
-                this.DataContext = new MainViewModel();
+            SaveSettingsButton.Click += SaveSettingsButton_Click;
+        }
+
+        private void SaveSettingsButton_Click(object sender, RoutedEventArgs e) {
+            CredentialManager.WriteCreds(SettingsManager.Settings.CredentialsName, Username.Text, Password.Password);
+
+            var setts = new SettingsSet(false) { IntervalSec = double.Parse(IntervalSec.Text) };
+            if (ChosedDate.SelectedDate.HasValue)
+                setts.ChosedDate = ChosedDate.SelectedDate.Value;
+
+            Commands.AllCommands["SaveSettings"].Execute(setts);
         }
 
         public void OnNavigatedFrom() {
-            var mainVM = (MainViewModel)this.DataContext;
+            var credentials = CredentialManager.ReadCreds(SettingsManager.Settings.CredentialsName);
 
-            //Check if settings changes
-            if (Username.Text != SettingsManager.Settings.Username || ChosedDate.SelectedDate != SettingsManager.Settings.ChosedDate || 
-                double.Parse(IntervalSec.Text) != SettingsManager.Settings.IntervalSec ||
-                Password.Password != new System.Net.NetworkCredential(string.Empty, SettingsManager.Settings.Password).Password) {
-
-                    //Ask, if user wants to save them
-                    var result = MessageBox.Show(mainVM.VMText["msgbox_save_settings_text"], mainVM.VMText["msgbox_save_settings_caption"], MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.ServiceNotification);
-                    if (result == MessageBoxResult.Yes)
-                        SaveSettingsButton.Command.Execute(SaveSettingsButton.CommandParameter);
+            //Check if settings changed
+            bool settingsChanged = Username.Text != credentials.UserName ||
+                Password.Password != credentials.Password ||
+                ChosedDate.SelectedDate != SettingsManager.Settings.ChosedDate ||
+                double.Parse(IntervalSec.Text) != SettingsManager.Settings.IntervalSec;
+                
+            if (settingsChanged) {
+                //Ask, if user wants to save them
+                var result = MessageBox.Show(Subtitles.GetText("msgbox_save_settings_text"), Subtitles.GetText("msgbox_save_settings_caption"), 
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.None, MessageBoxOptions.ServiceNotification);
+                if (result == MessageBoxResult.Yes)
+                    SaveSettingsButton_Click(SaveSettingsButton,new RoutedEventArgs());
             }
         }
 
         public void OnNavigatedTo(object parameter) {
             //Read parameters from settings
-            Password.Password = new System.Net.NetworkCredential(string.Empty, SettingsManager.Settings.Password).Password;
-            Username.Text = SettingsManager.Settings.Username;
+            var credentials = CredentialManager.ReadCreds(SettingsManager.Settings.CredentialsName);
+            Username.Text = credentials.UserName;
+            Password.Password = credentials.Password;
+
             ChosedDate.SelectedDate = SettingsManager.Settings.ChosedDate;
             IntervalSec.Text = SettingsManager.Settings.IntervalSec.ToString();
         }
 
         private void Interval_LostFocus(object sender, RoutedEventArgs e) {
-            var mainVM = (MainViewModel)this.DataContext;
             double x;
             if (double.TryParse(IntervalSec.Text, out x) == false) {
-                MessageBox.Show(mainVM.VMText["msgbox_wrong_interval_text"], mainVM.VMText["msgbox_wrong_data_generic_caption"], MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(Subtitles.GetText("msgbox_wrong_interval_text"), Subtitles.GetText("msgbox_wrong_data_generic_caption"), 
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
                 IntervalSec.Text = SettingsManager.Settings.IntervalSec.ToString();
             }
         }
+
     }
 }

@@ -12,15 +12,9 @@ using AppTemplate.View.Pages;
 
 namespace AppTemplate.VM {
     public class VMCommands : INotifyPropertyChanged {
-        private string _startStopButtonID;
-        public ICommand StartStopButton {
-            get {
-                return this[_startStopButtonID];
-            }
-            private set {      
-            }
-        }
         //Public properties
+        public event PropertyChangedEventHandler PropertyChanged;
+
         [IndexerName("Item")]
         public ICommand this[string key] {
             get {
@@ -30,84 +24,15 @@ namespace AppTemplate.VM {
 
         //Private properties
         private Dictionary<string, ICommand> _commands;
-        public Frame Frame;
-
-        //Public properties
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public VMCommands() {
-            _startStopButtonID = "RunProcess";
-            ProgramModel.StartStopStateChange += ProgramModel_StartStopStateChange;
-
-            _commands = new Dictionary<string, ICommand>();
-
-            _commands["ChangeLanguage"] = new Command((Object obj) => {
-                Subtitles.ChangeLanguage((string)obj);
-            });
-
-            _commands["ChangeTheme"] = new Command((Object obj) => {
-                Themes.ChangeTheme((string)obj);
-            });
-
-            _commands["Exit"] = new Command((Object obj) => {
-                App.Current.Shutdown();
-            });
-
-            _commands["ChangePage"] = new Command((Object obj) => {
-                if (obj is Type) {
-                    PagesManager.Navigate((Type)obj);
-                } else if (obj is string) {
-                    PagesManager.Navigate((string)obj);
-                }
-            });
-
-            _commands["GoBack"] = new Command((Object obj) => { PagesManager.GoBack(); },
-                (object obj) => { return PagesManager.CanGoBack(); });
-
-            _commands["GoForward"] = new Command((Object obj) => { PagesManager.GoForward(); },
-                (object obj) => { return PagesManager.CanGoForward(); });
-
-            _commands["MinimizeToTray"] = new Command((Object obj) => Tray.MinimizeToTray());
-
-            _commands["RestoreFromTray"] = new Command((Object obj) => Tray.RestoreFromTray());
-
-            _commands["SaveSettings"] = new Command((Object obj) => {
-                if (obj is ConfigPage) {
-                    var currentSettings = SettingsManager.SettingsGetCopy();
-                    currentSettings.Username = ((ConfigPage)obj).Username.Text;
-                    currentSettings.Password = ((ConfigPage)obj).Password.SecurePassword;
-                    if(((ConfigPage)obj).ChosedDate.SelectedDate.HasValue ==false)
-                        currentSettings.ChosedDate = ((ConfigPage)obj).ChosedDate.SelectedDate.Value;
-                    currentSettings.IntervalSec = int.Parse(((ConfigPage)obj).IntervalSec.Text);
-                    SettingsManager.Settings = currentSettings;
-                }
-            });
-
-            _commands["ChangeFontSize"] = new Command((Object obj) => {
-                if (obj is string) {
-                    int size;
-                    if (int.TryParse((string)obj, out size)) {
-                        var currentSettings = SettingsManager.SettingsGetCopy();
-                        currentSettings.FontSize = size;
-                        SettingsManager.Settings = currentSettings;
-                    }
-                }
-            });
-
-            _commands["RunProcess"] = new Command((Object obj) => ProgramModel.Start());
-
-            _commands["StopProcess"] = new Command((Object obj) => ProgramModel.Stop());
-
-            OnPropertyChanged("StartStopButton");
+            _commands = Commands.AllCommands;
+            Commands.CommandsChanged += Commands_CommandsChanged;
         }
 
-        private void ProgramModel_StartStopStateChange(object sender, CurrentState e) {
-            if (e == CurrentState.Running) {
-                _startStopButtonID = "StopProcess";
-            } else {
-                _startStopButtonID = "RunProcess";
-            }
-            OnPropertyChanged("StartStopButton");
+        private void Commands_CommandsChanged(object sender, EventArgs e) {
+            _commands = Commands.AllCommands;
+            OnPropertyChanged("Item[]");
         }
 
         private void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string name = null) {
@@ -117,7 +42,7 @@ namespace AppTemplate.VM {
 
         //Destructor
         ~VMCommands() {
-
+            Commands.CommandsChanged -= Commands_CommandsChanged;
         }
     }
 }

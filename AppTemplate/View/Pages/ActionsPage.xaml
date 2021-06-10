@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ActionsPage" Style="{DynamicResource {x:Type Page}}">
     <Page.DataContext>
-        <VM:MainViewModel></VM:MainViewModel>
+        <VM:VMMain></VM:VMMain>
     </Page.DataContext>
     <Grid x:Name="_actionsPageGrid" Grid.Column="1">
         <Grid.RowDefinitions>
@@ -30,7 +30,8 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button FontSize="{Binding FontSize}" Content="{Binding VMText.StartStopButton}" Command="{Binding VMCommands.StartStopButton}" Grid.Row="3" Grid.Column="1" />
-        <Button FontSize="{Binding FontSize}" Content="{Binding VMText[button_actions_minimize]}" Command="{Binding VMCommands[MinimizeToTray]}" Grid.Row="3" Grid.Column="3"  />
+        <Button FontSize="{Binding FontSize}" Content="{Binding VMText[button_actions_process_run]}" Command="{Binding VMCommands[RunProcess]}" Grid.Row="3" Grid.Column="1" />
+        <Button FontSize="{Binding FontSize}" Content="{Binding VMText[button_actions_process_stop]}" Command="{Binding VMCommands[StopProcess]}" Grid.Row="3" Grid.Column="3"  />
+        <Button FontSize="{Binding FontSize}" Content="{Binding VMText[button_actions_minimize]}" Command="{Binding VMCommands[MinimizeToTray]}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3"  />
     </Grid>
 </Page>

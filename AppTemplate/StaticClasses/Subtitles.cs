@@ -10,23 +10,32 @@ using System.Xml;
 namespace AppTemplate {
     static public class Subtitles {
         public static event EventHandler LanguageChanged;
-        public static Dictionary<string, string> Text { get; private set; }
+        public static Dictionary<string, string> CurrentLanguage { get; private set; }
         public static Dictionary<string, Dictionary<string, string>> AllLanguages { get; private set; }
-
 
         static Subtitles() {
             AllLanguages = new Dictionary<string, Dictionary<string, string>>();
-            LoadAllLanguages(@"appData\lang");
+            LoadAllLanguages(SettingsManager.Settings.DataFolder + @"\lang");
+            ChangeLanguage(SettingsManager.Settings.LanguageID);
         }
 
         public static string GetText(string key) {
-            if (Text.ContainsKey(key)) {
-                return Text[key];
+            if (CurrentLanguage.ContainsKey(key)) {
+                return CurrentLanguage[key];
             } else {
                 return "[" + key + "]";
             }
         }
 
+        public static void ChangeLanguage(string languageID) {
+            if (AllLanguages.ContainsKey(languageID)) {
+                CurrentLanguage = AllLanguages[languageID];
+                LanguageChanged?.Invoke(null, EventArgs.Empty);
+                SettingsManager.Settings = new SettingsSet(false) {LanguageID = languageID };
+            }
+        }
+
+        #region LoadLanguages
         private static void LoadAllLanguages(string folderPath) {
             LoadEmbeddedLanguages();
             if (Directory.Exists(folderPath)) {
@@ -34,7 +43,8 @@ namespace AppTemplate {
                 LoadTXTLanguages(folderPath);
             }
 
-            ChangeLanguage("pol");
+            CurrentLanguage = AllLanguages["pol"];
+            LanguageChanged?.Invoke(null, EventArgs.Empty);
         }
 
         private static void LoadEmbeddedLanguages() {
@@ -58,7 +68,6 @@ namespace AppTemplate {
                 AllLanguages[lang["language_id"]] = lang;
             } 
         }
-
 
         private static void LoadXMLLanguages(string folderPath) {
             foreach (var file in Directory.GetFiles(folderPath, "*.xml")) {
@@ -112,13 +121,7 @@ namespace AppTemplate {
                 }
             }
         }
-
-        public static void ChangeLanguage(string language) {
-            if (AllLanguages.ContainsKey(language)) {
-                Text = AllLanguages[language];
-                LanguageChanged?.Invoke(null, EventArgs.Empty);
-            }
-        }
+        #endregion LoadLanguages
 
     }
 

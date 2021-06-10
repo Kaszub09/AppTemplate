@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AboutPage" Style="{DynamicResource {x:Type Page}}">
     <Page.DataContext>
-        <VM:MainViewModel></VM:MainViewModel>
+        <VM:VMMain></VM:VMMain>
     </Page.DataContext>
     <Grid x:Name="_AboutPageGrid" Grid.Column="1" >
         <Grid.RowDefinitions>

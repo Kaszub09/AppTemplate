@@ -26,17 +26,17 @@ namespace AppTemplate {
 
         public MainWindow() {
             InitializeComponent();
-            if (!(this.DataContext is MainViewModel))
-                this.DataContext = new MainViewModel();
+            if (!(this.DataContext is VMMain))
+                this.DataContext = new VMMain();
 
             UpdateLanguageMenuButtons();
             UpdateThemeMenuButtons();
 
-            ((MainViewModel)this.DataContext).VMCommands["ChangePage"].Execute(typeof(ActionsPage));
+            ((VMMain)this.DataContext).VMCommands["ChangePage"].Execute(typeof(ActionsPage));
         }
 
         private void UpdateLanguageMenuButtons() {
-            var commands = ((MainViewModel)this.DataContext).VMCommands;
+            var commands = ((VMMain)this.DataContext).VMCommands;
             foreach (var lang in Subtitles.AllLanguages.Values) {
                 var langMenuItem = new MenuItem() {
                     Header = lang["language_display_name"],
@@ -60,7 +60,7 @@ namespace AppTemplate {
         }
 
         private void UpdateThemeMenuButtons() {
-            var commands = ((MainViewModel)this.DataContext).VMCommands;
+            var commands = ((VMMain)this.DataContext).VMCommands;
             foreach (var themeName in Themes.AllThemes.Keys) {
                 var themeMenuItem = new MenuItem() {
                     Command = commands["ChangeTheme"],
@@ -68,7 +68,7 @@ namespace AppTemplate {
                 };
 
                 Binding binding= new Binding("VMText[theme_"+ themeName +"]");
-                binding.Source = (MainViewModel)this.DataContext;
+                binding.Source = (VMMain)this.DataContext;
                 themeMenuItem.SetBinding(MenuItem.HeaderProperty, binding);
 
                 _topMenuTheme.Items.Add(themeMenuItem);

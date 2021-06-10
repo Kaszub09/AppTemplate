@@ -10,6 +10,7 @@ namespace AppTemplate {
     static public class PagesManager {
         public static event EventHandler PageChanged;
         public static INavigablePage CurrentPage { get; private set; }
+
         private static Dictionary<string,  INavigablePage> _allPages;
         private static List< INavigablePage> _navigationHistory;
         private static int _currentPageNumber;
@@ -22,7 +23,6 @@ namespace AppTemplate {
 
         public static void AddPage(string key, INavigablePage page) {
             _allPages[key] = page;
-
         }
 
         public static void Navigate(string key, object parameter = null) {

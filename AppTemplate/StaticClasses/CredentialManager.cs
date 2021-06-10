@@ -7,7 +7,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppTemplate.StaticClasses {
+namespace AppTemplate {
     static public class CredentialManager {
 
         static public bool WriteCreds(string credentialsName, string username, string password) {
@@ -63,15 +63,15 @@ namespace AppTemplate.StaticClasses {
         #region SYSTEM CREDENTIALS
         //Write cred
         [DllImport("Advapi32.dll", SetLastError = true, EntryPoint = "CredWriteW", CharSet = CharSet.Unicode)]
-        static extern bool CredWrite([In] ref NativeCredential userCredential, [In] UInt32 flags);
+        private static extern bool CredWrite([In] ref NativeCredential userCredential, [In] UInt32 flags);
         //Read cred
         [DllImport("Advapi32.dll", EntryPoint = "CredReadW", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern bool CredRead([MarshalAs(UnmanagedType.LPWStr)] string target, uint type, int reservedFlag, out IntPtr CredentialPtr);
+        private static extern bool CredRead([MarshalAs(UnmanagedType.LPWStr)] string target, uint type, int reservedFlag, out IntPtr CredentialPtr);
         //Cred Free
         [DllImport("advapi32.dll", SetLastError = true)]
-        static extern bool CredFree([In] IntPtr buffer);
+        private static extern bool CredFree([In] IntPtr buffer);
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-        internal struct NativeCredential {
+        private struct NativeCredential {
             public UInt32 Flags;
             public UInt32 Type;
             [MarshalAs(UnmanagedType.LPWStr)]

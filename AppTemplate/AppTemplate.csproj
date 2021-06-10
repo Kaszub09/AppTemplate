@@ -14,6 +14,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -23,7 +24,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -57,12 +58,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\ProgramData.cs" />
+    <Compile Include="Model\ProgramModel.cs" />
+    <Compile Include="StaticClasses\Logger.cs" />
+    <Compile Include="VM\SettingsSet.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="StaticClasses\Commands.cs" />
     <Compile Include="StaticClasses\CredentialManager.cs" />
     <Compile Include="StaticClasses\PagesManager.cs" />
     <Compile Include="StaticClasses\SettingsManager.cs" />
@@ -79,17 +83,17 @@
     <Compile Include="View\Pages\ConfigPage.xaml.cs">
       <DependentUpon>ConfigPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\NavigablePage.cs" />
+    <Compile Include="View\Pages\INavigablePage.cs" />
     <Compile Include="VM\Command.cs" />
-    <Compile Include="VM\MainViewModel.cs" />
+    <Compile Include="VM\VMMain.cs" />
     <Compile Include="VM\VMCommands.cs" />
     <Compile Include="VM\VMText.cs" />
-    <Page Include="appData\themes\Default.xaml">
+    <Page Include="data\themes\Default.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="appData\themes\Dark.xaml">
+    <Page Include="data\themes\Dark.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -106,7 +110,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="appData\themes\DSIII.xaml">
+    <Page Include="data\themes\DSIII.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -146,7 +150,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="appData\lang\Sample_additional_lang.xml">
+    <Content Include="data\lang\Sample_additional_lang.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\lang\Sample_additional_lang.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\taskbarLogo.png" />
@@ -156,7 +163,7 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="appData\lang\EmbeddedLanguages.xml">
+    <None Include="data\lang\EmbeddedLanguages.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

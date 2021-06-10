@@ -12,45 +12,54 @@ namespace AppTemplate {
         public static Dictionary<string, ResourceDictionary> AllThemes { get; private set; }
         private static string _currentThemeName;
 
-
         static Themes() {
-            _currentThemeName = null;
             AllThemes = new Dictionary<string, ResourceDictionary>();
-            LoadAllThemes(@"appData\themes");
-        }
-
-        private static void LoadAllThemes(string folderPath) {
-            LoadEmbeddedThemes();
-            if (Directory.Exists(folderPath))
-                LoadThemesInFolder(folderPath);
+            LoadAllThemes(SettingsManager.Settings.DataFolder);
 
             Application.Current.Resources.MergedDictionaries.Add(AllThemes["Default"]);
             _currentThemeName = "Default";
+            ChangeTheme(SettingsManager.Settings.ThemeID);           
         }
 
-        private static void LoadEmbeddedThemes() {
+        public static void ChangeTheme(string themeName) {
+            if (_currentThemeName != themeName && AllThemes.ContainsKey(themeName)) {
+                Application.Current.Resources.MergedDictionaries.Remove(AllThemes[_currentThemeName]);
+                Application.Current.Resources.MergedDictionaries.Add(AllThemes[themeName]);
+                _currentThemeName = themeName;
+                SettingsManager.Settings = new SettingsSet(false) { ThemeID = themeName };
+            }
+        }
+
+        #region LoadThemes
+        private static void LoadAllThemes(string folderPath) {
+            LoadEmbeddedThemes(folderPath);
+            if (Directory.Exists(folderPath))
+                LoadThemesInFolder(folderPath);
+        }
+
+        private static void LoadEmbeddedThemes(string folderPath) {
             try {
                 AllThemes.Add("Default", new ResourceDictionary() {
-                    Source = new Uri("appData/themes/Default.xaml", UriKind.RelativeOrAbsolute)
+                    Source = new Uri(folderPath +"/themes/Default.xaml", UriKind.RelativeOrAbsolute)
                 });
-            } catch (Exception) {//TO DO
+            } catch (Exception e) {//TO DO
+                AllThemes.Add("Default", new ResourceDictionary());
             }
 
             try {
                 AllThemes.Add("Dark", new ResourceDictionary() {
-                    Source = new Uri("appData/themes/Dark.xaml", UriKind.RelativeOrAbsolute)
+                    Source = new Uri(folderPath + "/themes/Dark.xaml", UriKind.RelativeOrAbsolute)
                 });
-            } catch (Exception) {//TO DO
+            } catch (Exception e) {//TO DO
             }
 
             try {
                 AllThemes.Add("DSIII", new ResourceDictionary() {
-                    Source = new Uri("appData/themes/DSIII.xaml", UriKind.RelativeOrAbsolute)
+                    Source = new Uri(folderPath + "/themes/DSIII.xaml", UriKind.RelativeOrAbsolute)
                 });
-            } catch (Exception) { //TO DO
+            } catch (Exception e) { //TO DO
             }
         }
-
 
         private static void LoadThemesInFolder(string folderPath) {
             var regEx = new Regex(@"\\([^\\]+?).xaml");
@@ -66,14 +75,8 @@ namespace AppTemplate {
                 }
             }
         }
+        #endregion LoadThemes
 
 
-        public static void ChangeTheme(string themeName) {
-            if (_currentThemeName!= themeName && AllThemes.ContainsKey(themeName)) {
-                Application.Current.Resources.MergedDictionaries.Remove(AllThemes[_currentThemeName]);
-                Application.Current.Resources.MergedDictionaries.Add(AllThemes[themeName]);
-                _currentThemeName = themeName;
-            }
-        }
     }
 }

@@ -10,11 +10,11 @@ using System.Windows.Forms;
 namespace AppTemplate {
     public static class Tray {
         static private NotifyIcon _trayIcon;
-        static private MainViewModel _MV;
+        static private VMMain _MV;
         static public int DummyVariable;
 
         static Tray() {
-            _MV = new MainViewModel();
+            _MV = new VMMain();
 
             //Tray icon settings
             _trayIcon = new NotifyIcon();
@@ -47,43 +47,37 @@ namespace AppTemplate {
                 }
             };
 
-            //Menu item 1...
-            var menuItem1 = new MenuItem() { Tag = "button_actions_process_run", Text = _MV.VMText["button_actions_process_run"] };
-            menuItem1.Click += MenuItem_ClickStart;
+            //Start process
+            var menuItem1 = new MenuItem() { Tag = "button_actions_process_run", Text = Subtitles.GetText("button_actions_process_run") };
+            menuItem1.Click += (sender, e) => Commands.AllCommands["RunProcess"].Execute(null);
             menu.MenuItems.Add(menuItem1);
 
-            ProgramModel.StartStopStateChange += (sender, e) => {
-                if (e == CurrentState.Running) {
-                    menuItem1.Tag = "button_actions_process_stop";
-                    menuItem1.Click -= MenuItem_ClickStart;
-                    menuItem1.Click += MenuItem_ClickStop;
-                } else {
-                    menuItem1.Tag = "button_actions_process_run";
-                    menuItem1.Click -= MenuItem_ClickStop;
-                    menuItem1.Click += MenuItem_ClickStart;
-                }
-                menuItem1.Text = _MV.VMText[(string)menuItem1.Tag];
-            };
-
-            //Menu item 2...
-            var menuItem2 = new MenuItem() { Tag = "button_restore_from_tray", Text = _MV.VMText["button_restore_from_tray"] };
-            menuItem2.Click += (sender, e) => _MV.VMCommands["RestoreFromTray"].Execute(null);
+            //Stop process
+            var menuItem2 = new MenuItem() { Tag = "button_actions_process_stop", Text = Subtitles.GetText("button_actions_process_stop") };
+            menuItem2.Click += (sender, e) => Commands.AllCommands["StopProcess"].Execute(null);
             menu.MenuItems.Add(menuItem2);
 
-            //Menu item 3 ...
-            var menuItem3 = new MenuItem() { Tag = "menu_button_exit", Text = _MV.VMText["menu_button_exit"] };
-            menuItem3.Click += (sender, e) => _MV.VMCommands["Exit"].Execute(null);
+            ProgramModel.IsRunningChanged += (sender, e) => {
+                if (ProgramModel.IsRunning == true) {
+                    menuItem1.Enabled = false;
+                    menuItem2.Enabled = true;
+                } else {
+                    menuItem1.Enabled = true;
+                    menuItem2.Enabled = false;
+                }
+            };
+
+            //Restore form tray
+            var menuItem3 = new MenuItem() { Tag = "button_restore_from_tray", Text = Subtitles.GetText("button_restore_from_tray") };
+            menuItem3.Click += (sender, e) => Commands.AllCommands["RestoreFromTray"].Execute(null);
             menu.MenuItems.Add(menuItem3);
 
+            //Exit applciation
+            var menuItem4 = new MenuItem() { Tag = "menu_button_exit", Text = Subtitles.GetText("menu_button_exit") };
+            menuItem4.Click += (sender, e) => Commands.AllCommands["Exit"].Execute(null);
+            menu.MenuItems.Add(menuItem4);
+
             return menu;
-        }
-
-        private static void MenuItem_ClickStart(object sender, EventArgs e) {
-            _MV.VMCommands["RunProcess"].Execute(null);
-        }
-
-        private static void MenuItem_ClickStop(object sender, EventArgs e) {
-            _MV.VMCommands["StopProcess"].Execute(null);
         }
 
         private static void _trayIcon_MouseClick(object sender, MouseEventArgs e) {

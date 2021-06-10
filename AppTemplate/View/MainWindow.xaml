@@ -4,13 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppTemplate"
-        xmlns:VM="clr-namespace:AppTemplate.VM"
-         xmlns:Pages="clr-namespace:AppTemplate.View.Pages"
+        
+         xmlns:Pages="clr-namespace:AppTemplate.View.Pages" xmlns:VM="clr-namespace:AppTemplate.VM"
         mc:Ignorable="d"
         Title="{Binding VMText[app_name]}"  Height="450" Width="850" Icon="/AppTemplate;component/Resources/taskbarLogo.png"
         MinHeight="450" MinWidth="850" Style="{DynamicResource {x:Type Window}}" >
     <Window.DataContext>
-        <VM:MainViewModel></VM:MainViewModel>
+        <VM:VMMain></VM:VMMain>
     </Window.DataContext>
     <DockPanel x:Name="_dockPanel">
         <!--TOP MENU-->
