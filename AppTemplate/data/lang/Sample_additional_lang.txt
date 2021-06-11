@@ -1,9 +1,9 @@
 #Comments after hash
 language_id==sample_lang_caps
-language_display_name=SAMPLE TEXT LANGUAGE
+language_display_name==SAMPLE TEXT LANGUAGE\nNEW LINE
 
-top_menu_options== OPTIONS
+top_menu_options==OPTIONS
 top_menu_language==LANGUAGE
 top_menu_style==STYLE
-top_menu_font_size==Schriftgröße
+top_menu_font_size==FONT SIZE
  

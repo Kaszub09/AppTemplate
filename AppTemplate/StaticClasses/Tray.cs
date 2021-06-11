@@ -98,7 +98,8 @@ namespace AppTemplate {
         }
 
         static public void ShowNotification(int timeout, string tipTitle, string tipText,ToolTipIcon tipIcon) {
-            _trayIcon.ShowBalloonTip(timeout, tipTitle, tipText, tipIcon);
+            if(SettingsManager.Settings.ShowNotifications)
+                _trayIcon.ShowBalloonTip(timeout, tipTitle, tipText, tipIcon);
         }
 
         

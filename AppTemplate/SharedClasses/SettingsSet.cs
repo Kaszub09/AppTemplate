@@ -13,6 +13,7 @@ namespace AppTemplate {
         public double IntervalSec = 60;
         public int FontSize = 12;
         public DateTime ChosedDate = DateTime.Today;
+        public bool ShowNotifications=true;
 
         public SettingsSet():this(false) {
         }
@@ -26,6 +27,7 @@ namespace AppTemplate {
                 IntervalSec = SettingsManager.Settings.IntervalSec;
                 FontSize = SettingsManager.Settings.FontSize;
                 ChosedDate = SettingsManager.Settings.ChosedDate;
+                ShowNotifications = SettingsManager.Settings.ShowNotifications;
             }
         }
     }

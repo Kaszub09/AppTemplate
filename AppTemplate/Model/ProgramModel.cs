@@ -8,7 +8,7 @@ using AppTemplate;
 using ProgramTemplate;
 
 namespace AppTemplate.Model {
-
+    
     public enum CurrentState {
         Running,
         NotRunning

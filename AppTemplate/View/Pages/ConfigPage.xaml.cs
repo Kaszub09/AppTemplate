@@ -32,6 +32,8 @@ namespace AppTemplate.View.Pages {
             if (ChosedDate.SelectedDate.HasValue)
                 setts.ChosedDate = ChosedDate.SelectedDate.Value;
 
+            setts.ShowNotifications = ShowNotifications.IsChecked.Value;
+
             Commands.AllCommands["SaveSettings"].Execute(setts);
         }
 
@@ -42,8 +44,9 @@ namespace AppTemplate.View.Pages {
             bool settingsChanged = Username.Text != credentials.UserName ||
                 Password.Password != credentials.Password ||
                 ChosedDate.SelectedDate != SettingsManager.Settings.ChosedDate ||
-                double.Parse(IntervalSec.Text) != SettingsManager.Settings.IntervalSec;
-                
+                double.Parse(IntervalSec.Text) != SettingsManager.Settings.IntervalSec ||
+                ShowNotifications.IsChecked.Value != SettingsManager.Settings.ShowNotifications;
+
             if (settingsChanged) {
                 //Ask, if user wants to save them
                 var result = MessageBox.Show(Subtitles.GetText("msgbox_save_settings_text"), Subtitles.GetText("msgbox_save_settings_caption"), 
@@ -61,6 +64,7 @@ namespace AppTemplate.View.Pages {
 
             ChosedDate.SelectedDate = SettingsManager.Settings.ChosedDate;
             IntervalSec.Text = SettingsManager.Settings.IntervalSec.ToString();
+            ShowNotifications.IsChecked = SettingsManager.Settings.ShowNotifications;
         }
 
         private void Interval_LostFocus(object sender, RoutedEventArgs e) {

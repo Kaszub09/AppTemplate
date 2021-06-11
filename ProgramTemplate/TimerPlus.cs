@@ -9,7 +9,7 @@ namespace ProgramTemplate {
     public class TimerPlus : Timer {
         DateTime? _nextEvent;
 
-        public TimerPlus():base() {
+        public TimerPlus() : base() {
             this.Elapsed += TimerPlus_Elapsed;
         }
 
@@ -22,7 +22,7 @@ namespace ProgramTemplate {
         }
 
         public double? MilisecTillNextRun() {
-            if(_nextEvent == null) {
+            if (_nextEvent == null) {
                 return null;
             } else {
                 return _nextEvent.Value.Subtract(DateTime.Now).TotalMilliseconds;

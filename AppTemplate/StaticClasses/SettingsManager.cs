@@ -8,13 +8,11 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
 namespace AppTemplate {
-
 
     public static class SettingsManager {
         private static SettingsSet _settings;

@@ -10,6 +10,6 @@ namespace ProgramTemplate {
         public string Username;
         public SecureString Password;
         public DateTime Date;
-        
+
     }
 }

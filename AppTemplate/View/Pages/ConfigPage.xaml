@@ -12,10 +12,12 @@
     <Page.DataContext>
         <VM:VMMain></VM:VMMain>
     </Page.DataContext>
-    <Grid x:Name="_configPageGrid" Grid.Column="0"  >
+    <Grid x:Name="_configPageGrid" Grid.Column="0" >
 
         <Grid.RowDefinitions>
             <RowDefinition Height="3*" />
+            <RowDefinition Height="2*"/>
+            <RowDefinition />
             <RowDefinition Height="2*"/>
             <RowDefinition />
             <RowDefinition Height="2*"/>
@@ -46,6 +48,12 @@
         <Label FontSize="{Binding FontSize}" Content="{Binding VMText[config_label_interval_sec]}" Grid.Column="1" Grid.Row="7" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         <TextBox FontSize="{Binding FontSize}" Name="IntervalSec" Text="2000" Grid.Column="3"    Grid.Row="7" TextWrapping="NoWrap"  VerticalContentAlignment="Center" LostFocus="Interval_LostFocus"/>
 
-        <Button x:Name="SaveSettingsButton" FontSize="{Binding FontSize}" Content="{Binding VMText[config_button_save]}"  Grid.Column="1"  Grid.Row="9"  Grid.ColumnSpan="2"   />
+        <Label FontSize="{Binding FontSize}" Content="{Binding VMText[config_label_show_notifications]}" Grid.Column="1" Grid.Row="9" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <Viewbox Grid.Column="3" Grid.Row="9" Margin="8">
+            <CheckBox x:Name="ShowNotifications"  />
+        </Viewbox>
+
+
+        <Button x:Name="SaveSettingsButton" FontSize="{Binding FontSize}" Content="{Binding VMText[config_button_save]}"  Grid.Column="1"  Grid.Row="11"  Grid.ColumnSpan="2"   />
     </Grid>
 </Page>

@@ -38,6 +38,7 @@ uznania :]
     <text id="config_label_user">Email - użytkownik</text>
     <text id="config_label_password">Email - hasło</text>
     <text id="config_label_interval_sec">Interwał (w sekundach)</text>
+    <text id="config_label_show_notifications">Pokazuj powiadomienia</text>
     <text id="config_button_save">Zapisz ustawienia</text>
     
     <!--=== TRAY ===-->
@@ -106,6 +107,7 @@ sparingly :)</text>
     <text id="config_label_user">Email username</text>
     <text id="config_label_password">Email password</text>
     <text id="config_label_interval_sec">Interval (in seconds)</text>
+    <text id="config_label_show_notifications">Show notifications</text>
     <text id="config_button_save">Save settings</text>
     
     <!--=== TRAY ===-->

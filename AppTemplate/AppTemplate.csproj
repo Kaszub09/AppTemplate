@@ -59,8 +59,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\ProgramModel.cs" />
-    <Compile Include="StaticClasses\Logger.cs" />
-    <Compile Include="VM\SettingsSet.cs" />
+    <Compile Include="StaticClasses\GLogger.cs" />
+    <Compile Include="SharedClasses\SettingsSet.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -84,7 +84,7 @@
       <DependentUpon>ConfigPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\INavigablePage.cs" />
-    <Compile Include="VM\Command.cs" />
+    <Compile Include="SharedClasses\Command.cs" />
     <Compile Include="VM\VMMain.cs" />
     <Compile Include="VM\VMCommands.cs" />
     <Compile Include="VM\VMText.cs" />
@@ -168,8 +168,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Logging\Logging.csproj">
+      <Project>{9591c187-fa3f-4064-ab05-95cf31473a35}</Project>
+      <Name>Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProgramTemplate\ProgramTemplate.csproj">
-      <Project>{38ba4c73-0e0e-4d78-bc26-9176276f8ab9}</Project>
+      <Project>{d5da0d7c-0fdc-4a14-80d6-05b4ae14626d}</Project>
       <Name>ProgramTemplate</Name>
     </ProjectReference>
   </ItemGroup>

@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 using System.Timers;
 using Timer = System.Timers.Timer;
 
-namespace ProgramTemplate
-{
-    public class Program
-    {
+namespace ProgramTemplate {
+    public class Program {
         public bool IsRunning { get; private set; }
-        
+
         private double _intervalMilisec;
         private TimerPlus _processTimer;
         private Timer _timeUpdate;
@@ -24,7 +22,7 @@ namespace ProgramTemplate
         private ProcessParameters _parameters;
         private Task _process;
 
-        public Program(ProcessParameters parameters, double intervalMilisec,IProgress<DateTime?> nextRun = null, IProgress<ProgressInfo> processProgress = null) {
+        public Program(ProcessParameters parameters, double intervalMilisec, IProgress<DateTime?> nextRun = null, IProgress<ProgressInfo> processProgress = null) {
             _parameters = parameters;
             _intervalMilisec = intervalMilisec;
             IsRunning = false;
@@ -40,7 +38,7 @@ namespace ProgramTemplate
         }
 
         private void _timeUpdate_Elapsed(object sender, ElapsedEventArgs e) {
-            if(_nextRun != null) {
+            if (_nextRun != null) {
                 _nextRun.Report(_processTimer.NextRun());
             }
         }
@@ -52,7 +50,7 @@ namespace ProgramTemplate
                 }
             }
 
-            _process = new Task(()=> new Process(_parameters,_token.Token,_processProgress).Run());
+            _process = new Task(() => new Process(_parameters, _token.Token, _processProgress).Run());
             _process.Start();
             Console.WriteLine("program: " + _process.Id);
         }
@@ -78,7 +76,7 @@ namespace ProgramTemplate
                 _processTimer.Stop();   //Stop timer
                 _token.Cancel();    //Request proces to stop
                 _process?.Wait();    //Wait for process to stop
-                IsRunning = false;  
+                IsRunning = false;
                 //Stop info about next run timer
                 _timeUpdate.Stop();
                 return true;

@@ -23,8 +23,8 @@ namespace ProgramTemplate {
             _processProgress?.Report(progInfo);
 
             //simulate work
-            for (int i = 1; i <=10; i++) {
-                if(_token.HasValue && _token.Value.IsCancellationRequested == true) {
+            for (int i = 1; i <= 10; i++) {
+                if (_token.HasValue && _token.Value.IsCancellationRequested == true) {
                     Console.WriteLine("CANCELATION REQUESTED");
                     break;
                 }
