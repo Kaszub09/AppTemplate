@@ -105,7 +105,7 @@ namespace AppTemplate {
 
                     foreach (var line in lines) {
                         if (line.Trim().Length > 0 && !line.StartsWith("#") && line.Contains("==")) {
-                            var sLine = line.Split("==".ToArray());
+                            var sLine = line.Split(new string[]{"=="}, StringSplitOptions.RemoveEmptyEntries);
                             lang[sLine[0].Trim()] = System.Text.RegularExpressions.Regex.Unescape(sLine[1]);
                         }
                     }
